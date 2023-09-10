@@ -1,0 +1,317 @@
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@500&display=swap");
+
+* {
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+body {
+  font-family: Quicksand;
+  -webkit-font-smoothing: antialiased;
+  background: linear-gradient(45deg, #ffffff, #ffb52c);
+  background-attachment: fixed;
+}
+
+#title {
+  text-align: center;
+  margin: 2rem 0;
+}
+
+.searchinput {
+  margin-bottom: 2rem;
+}
+
+span {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}
+
+.input {
+  width: 30%;
+  border: none;
+  border-radius: 4px;
+  padding: 5px;
+  height: 40px;
+  outline: none;
+  color: #4d4d4d;
+}
+
+.table-wrapper {
+  margin: 10px 70px 70px;
+  box-shadow: 0px 35px 50px rgba(0, 0, 0, 0.2);
+}
+
+.fl-table {
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: normal;
+  border: none;
+  border-collapse: collapse;
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  background-color: white;
+}
+
+.fl-table td,
+.fl-table th {
+  text-align: center;
+  padding: 8px;
+}
+
+.fl-table td {
+  border-right: 1px solid #f8f8f8;
+  font-size: 14px;
+}
+
+.fl-table thead th {
+  color: #ffffff;
+  background: #6f7bd9;
+}
+
+.fl-table thead th:nth-child(odd) {
+  color: #ffffff;
+  background: #30305b;
+}
+
+.fl-table tr:nth-child(even) {
+  background: #f8f8f8;
+}
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.pagination .ant-btn {
+  width: 120px; /* Adjust the width as needed */
+}
+
+/* Style for the "Page X of Y" span element */
+.pagination span {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  font-size: 1.2rem;
+  color: #1890ff; /* Text color for the page information */
+}
+
+/* Add margin to the table */
+.table {
+  margin: 0 auto;
+  max-width: 90vw; /* Adjust the maximum width as needed */
+}
+
+/* Center the search input fields */
+.search-input-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 20px; /* Add margin to separate from the table */
+}
+
+/* Add custom styles for your modal */
+.ant-modal {
+  max-width: 600px; /* Set the maximum width of the modal */
+  margin-top: -70px;
+}
+
+.ant-modal-header {
+  background-color: #1890ff; /* Header background color */
+  color: #fff; /* Header text color */
+}
+
+.ant-modal-title {
+  color: #fff; /* Title text color */
+}
+
+.ant-modal-footer {
+  border-top: none; /* Remove the border from the footer */
+}
+
+/* Style the update modal content */
+.update-modal-content {
+  text-align: center; /* Center-align content */
+}
+
+/* Style the update modal image */
+.update-modal-img {
+  max-width: 100%; /* Set the maximum width for the image */
+}
+
+/* Style the update modal headings */
+.update-modal-heading {
+  font-size: 1.2rem; /* Adjust heading font size */
+  margin-bottom: 10px; /* Add some margin to the bottom */
+}
+
+/* Define styles for the image preview */
+.avatar-image {
+  max-width: 100%; /* Ensure the image fits within the container */
+  max-height: 200px; /* Define a maximum height to control the size */
+  display: block; /* Remove any extra spacing around the image */
+  margin: 0 auto; /* Center the image horizontally */
+  margin-top: 10px; /* Add some spacing below the image */
+  margin-bottom: 10px;
+}
+
+.avatar-detail {
+  max-width: 100%; /* Ensure the image fits within the container */
+  max-height: 200px; /* Define a maximum height to control the size */
+  display: block; /* Remove any extra spacing around the image */
+  margin-top: 10px; /* Add some spacing below the image */
+}
+
+/* Add margin to label elements */
+.label-margin {
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+/* Add margin to the label in the detail modal */
+.label-detail {
+  font-weight: bold;
+  margin-top: 1rem; /* Add top margin */
+  margin-bottom: 0.5rem; /* Add bottom margin */
+}
+
+/* Center the "Choose File" button using the .center-button class */
+.center-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px; /* Adjust the margin as needed */
+  margin: 0 auto !important;
+}
+
+/* Center the "Choose File" button */
+.input-group input[type="file"] {
+  display: none; /* Hide the default file input */
+}
+
+/* Style the "Choose File" button */
+.center-button .custom-file-upload {
+  display: inline-block;
+  padding: 7px;
+  cursor: pointer;
+  background-color: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  -ms-border-radius: 10px;
+  -o-border-radius: 10px;
+}
+
+.center-button .custom-file-upload:hover {
+  background-color: #096dd9;
+}
+
+/* Center the title text in the Modal */
+.ant-modal-title {
+  text-align: center;
+}
+
+/* Style the detail modal content */
+.detail-modal-content {
+  text-align: center; /* Center-align content */
+  padding: 20px;
+}
+
+/* Style the detail modal image */
+.detail-modal-img {
+  max-width: 100%; /* Set the maximum width for the image */
+}
+
+/* Style the detail modal headings */
+.detail-modal-heading {
+  font-size: 1.2rem; /* Adjust heading font size */
+  margin-bottom: 10px; /* Add some margin to the bottom */
+}
+
+/* Responsive */
+
+@media (max-width: 767px) {
+  .fl-table {
+    display: block;
+    width: 100%;
+  }
+
+  .table-wrapper:before {
+    content: "Scroll horizontally >";
+    display: block;
+    text-align: right;
+    font-size: 11px;
+    color: white;
+    padding: 0 0 10px;
+  }
+
+  .fl-table thead,
+  .fl-table tbody,
+  .fl-table thead th {
+    display: block;
+  }
+
+  .fl-table thead th:last-child {
+    border-bottom: none;
+  }
+
+  .fl-table thead {
+    float: left;
+  }
+
+  .fl-table tbody {
+    width: auto;
+    position: relative;
+    overflow-x: auto;
+  }
+
+  .fl-table td,
+  .fl-table th {
+    padding: 20px 0.625em 0.625em 0.625em;
+    height: 60px;
+    vertical-align: middle;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto;
+    width: 120px;
+    font-size: 13px;
+    text-overflow: ellipsis;
+  }
+
+  .fl-table thead th {
+    text-align: left;
+    border-bottom: 1px solid #f7f7f9;
+  }
+
+  .fl-table tbody tr {
+    display: table-cell;
+  }
+
+  .fl-table tbody tr:nth-child(odd) {
+    background: none;
+  }
+
+  .fl-table tr:nth-child(even) {
+    background: transparent;
+  }
+
+  .fl-table tr td:nth-child(odd) {
+    background: #f8f8f8;
+    border-right: 1px solid #e6e4e4;
+  }
+
+  .fl-table tr td:nth-child(even) {
+    border-right: 1px solid #e6e4e4;
+  }
+
+  .fl-table tbody td {
+    display: block;
+    text-align: center;
+  }
+}
