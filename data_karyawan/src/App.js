@@ -78,7 +78,7 @@ function App() {
   // Handle Update
   // Represent single data using parameter: record
   const handleUpdate = (record) => {
-    setSelectedUser(record);
+    setSelectedUser(record); // set select user for update
     setIsUpdateModalVisible(true);
     setUpdatedUserData({
       firstName: record.first_name,
@@ -90,13 +90,13 @@ function App() {
 
   // Handle Show Delete
   const showDeleteModal = (record) => {
-    setSelectedUser(record);
+    setSelectedUser(record); // set select user for deletion
     setIsDeleteModalVisible(true);
   };
 
   // Handle Show Detail
   const showDetailModal = (record) => {
-    setUserDetails(record);
+    setUserDetails(record); // set user detail
     setIsDetailModalVisible(true);
   };
 
@@ -323,18 +323,23 @@ function App() {
               <input
                 type="file"
                 id="fileInput"
-                accept="image/*"
+                accept="image/*" // limit ke image file only
                 onChange={(e) => {
+                  // Defines an event handler for when the input value changes.
                   const file = e.target.files[0];
                   if (file) {
-                    const reader = new FileReader();
+                    const reader = new FileReader(); // It reads the selected file as a data URL (using FileReader) javascript build in (instance)
+                    console.log(
+                      "🚀 ~ file: App.js:332 ~ App ~ reader:",
+                      reader
+                    );
                     reader.onload = (e) => {
                       setUpdatedUserData({
                         ...updatedUserData,
                         avatar: e.target.result,
                       });
                     };
-                    reader.readAsDataURL(file);
+                    reader.readAsDataURL(file); // jadi base 64
                   }
                 }}
               />
@@ -347,23 +352,25 @@ function App() {
           </div>
         )}
       </Modal>
+      {/* COMPONENT MODAL DELETE */}
       <Modal
         title="Confirm Delete"
         visible={isDeleteModalVisible}
         onOk={handleDelete}
         onCancel={() => setIsDeleteModalVisible(false)}
-        okText="Delete"
+        okText="Delete" // write delete on text
         okType="danger"
-        cancelText="Cancel"
+        cancelText="Cancel" // write cancle on text
       >
         <p>
-          Are you sure you want to delete the user:{" "}
+          Are you sure you want to delete the user:
           {selectedUser
             ? `${selectedUser.first_name} ${selectedUser.last_name}`
             : ""}
           ?
         </p>
       </Modal>
+      {/* COMPONENT MODAL DETAIL */}
       <Modal
         title="User Details"
         visible={isDetailModalVisible}
