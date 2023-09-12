@@ -6,6 +6,7 @@ import { AppContext } from "./context";
 
 const Navbar = () => {
   const [isNavDisplay, setIsNavDisplay] = useState(false);
+  // use the useContext to access the data
   const data = useContext(AppContext);
 
   return (
@@ -14,7 +15,7 @@ const Navbar = () => {
         <div className="logo">
           <BiMenuAltLeft
             className="sidebar-open-btn"
-            onClick={() => data.setIsSidebarOpen(!data.isSidebarOpen)}
+            onClick={() => data.setIsSidebarOpen(!data.isSidebarOpen)} // agar bisa ditutup habis click, awalnya false jadi true dst
           />
           <img src={LogoGreetDay} alt="logo" />
         </div>
@@ -73,6 +74,7 @@ const Navbar = () => {
                 style={{
                   display: "grid",
                   gridTemplateColumns: "1fr 1fr",
+                  marginLeft: "2.5rem",
                 }}
               >
                 <li>

@@ -15,7 +15,7 @@ const Sidebar = () => {
       >
         <FiX
           className="close-btn"
-          onClick={() => data.setIsSidebarOpen(false)}
+          onClick={() => data.setIsSidebarOpen(false)} // intial set false
         />
         <ul>
           <li>

@@ -3,7 +3,6 @@
 # HOW TO RUN:
 
 - [npm start](#npm-start)
-
 # DEPLOYMENT:
 
 ```

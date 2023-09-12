@@ -78,6 +78,7 @@ html {
 
 .submenu {
   display: none;
+  text-align: center;
 }
 
 .submenu ul {
@@ -92,7 +93,7 @@ html {
   display: block;
   position: absolute;
   width: 50rem;
-  right: 2rem;
+  right: 1rem;
   padding: 2rem 4rem;
 
   background-color: rgb(255, 255, 255);
@@ -106,6 +107,8 @@ html {
   font-size: 1.6rem;
   margin-top: 2rem;
   color: black;
+  text-decoration: none;
+  padding: 1rem 0;
 }
 
 .submenu .submenu-link:hover {
@@ -148,11 +151,12 @@ html {
   background-color: #ffc773;
 }
 
+/* close button */
 .close-btn {
   color: rgb(0, 0, 0);
-  font-size: 4rem;
-  margin-left: 80%;
-  margin-top: 1rem;
+  font-size: 3rem;
+  margin-left: 85%;
+  margin-top: 3rem;
   cursor: pointer;
 }
 
@@ -160,7 +164,7 @@ html {
   transform: translateX(0%);
 }
 
-/* ************* MEDIA QUERY ***************** */
+/************** MEDIA QUERY ******************/
 
 @media (max-width: 700px) {
   .menu-btn {
@@ -171,11 +175,51 @@ html {
     display: block;
   }
 
+  /* SUBMENU */
+
+  .submenu {
+    display: none;
+    text-align: center;
+  }
+
+  .submenu ul {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 4rem;
+    row-gap: 2rem;
+  }
+
+  .nav-links li:hover .submenu {
+    display: block;
+    position: absolute;
+    width: 40rem;
+    right: 0;
+    padding: 1rem 0.5rem;
+    background-color: rgb(255, 255, 255);
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+      rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    color: #ffab2c;
+  }
+
+  .submenu .submenu-link {
+    text-decoration: none;
+    font-size: 1.6rem;
+    margin-top: 2rem;
+    color: black;
+    text-decoration: none;
+    padding: 1rem 0;
+  }
+
+  .submenu .submenu-link:hover {
+    font-weight: 600;
+    color: #ffab2c;
+  }
+
   .nav-links {
     height: 0;
     pointer-events: none;
     visibility: hidden;
-
     width: 100%;
     gap: 2rem;
     display: block;
@@ -186,6 +230,7 @@ html {
     height: 20rem;
     pointer-events: auto;
     visibility: visible;
+    margin-bottom: 3rem;
   }
 
   .nav-links li a {
@@ -199,5 +244,13 @@ html {
 
   .modal-content p {
     font-size: 1.2rem;
+  }
+
+  .close-btn {
+    color: rgb(0, 0, 0);
+    font-size: 3rem;
+    margin-left: 85%;
+    margin-top: 4.5rem;
+    cursor: pointer;
   }
 }
