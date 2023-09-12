@@ -21,44 +21,62 @@ function App() {
     avatar: "",
   });
 
-  const URL = `https://reqres.in/api/users?page=${currentPage}&per_page=5`;
+  const URL = `https://reqres.in/api/users?page=${currentPage}&per_page=5`; // represent currentPage dengan setCurrentPage
 
   const getData = async () => {
     try {
       const response = await axios.get(URL);
       setData(response.data.data);
-      setTotalPages(response.data.total_pages);
+      console.log(
+        "🚀 ~ file: App.js:30 ~ response.data.data:",
+        response.data.data
+      );
+      console.log("🚀 ~ file: App.js:30 ~ Response:", response);
+      setTotalPages(response.data.total_pages); // set pages in TotalPages
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
 
   useEffect(() => {
-    window.scrollTo(0, 0);
+    window.scrollTo(0, 0); // by default ke atas
     getData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
+  // Filter By Name
   const nameFilter = (event) => {
     setNameField(event.target.value);
   };
 
+  // Filter By Email
   const emailFilter = (event) => {
     setEmailField(event.target.value);
   };
 
+  // Cari data user based on stored states nameField and emailField
+  const filteredData = data.filter((d) => {
+    return nameField
+      ? d.first_name.toLowerCase().includes(nameField.toLowerCase())
+      : d.email.toLowerCase().includes(emailField.toLowerCase());
+  });
+
+  // Handle Previous Page
   const handlePrevPage = () => {
     if (currentPage > 1) {
-      setCurrentPage(currentPage - 1);
+      setCurrentPage(currentPage - 1); // set current page for handlePreviouspage
     }
   };
 
+  // Handle Next Page
   const handleNextPage = () => {
     if (currentPage < totalPages) {
-      setCurrentPage(currentPage + 1);
+      setCurrentPage(currentPage + 1); // set current page for handleNextpage
     }
   };
 
+  // Handle Update
+  // Represent single data using parameter: record
   const handleUpdate = (record) => {
     setSelectedUser(record);
     setIsUpdateModalVisible(true);
@@ -70,40 +88,46 @@ function App() {
     });
   };
 
+  // Handle Show Delete
   const showDeleteModal = (record) => {
     setSelectedUser(record);
     setIsDeleteModalVisible(true);
   };
 
+  // Handle Show Detail
   const showDetailModal = (record) => {
     setUserDetails(record);
     setIsDetailModalVisible(true);
   };
 
-  const handleDelete = () => {
+  // Function to handle user deletion
+  const handleDelete = async () => {
     const userId = selectedUser.id;
-    // Perform the delete action here, e.g., send a DELETE request to your API
-    axios
-      .delete(`https://reqres.in/api/users/${userId}`)
-      .then((response) => {
-        if (response.status === 204) {
-          console.log("User deleted successfully.");
-          getData(); // Refresh the data after deletion
-        } else {
-          console.error("Error deleting user.");
-        }
-      })
-      .catch((error) => {
-        console.error("Error deleting user:", error);
-      })
-      .finally(() => {
-        setIsDeleteModalVisible(false);
-      });
+    try {
+      // Send a DELETE request to your API
+      const response = await axios.delete(
+        `https://reqres.in/api/users/${userId}`
+      );
+
+      if (response.status === 204) {
+        // HTTP status code if delete is successful
+        console.log("User deleted successfully.");
+        getData(); // Refresh the data after deletion
+      } else {
+        console.error("Error deleting user.");
+      }
+    } catch (error) {
+      console.error("Error deleting user:", error);
+    } finally {
+      setIsDeleteModalVisible(false);
+    }
   };
 
+  // Function to handle user data update
   const updateUserData = async () => {
+    const userId = selectedUser.id;
     try {
-      // Prepare the updated user data based on the input fields
+      // Prepare the updated user data based on the input fields (payload)
       const updatedData = {
         first_name: updatedUserData.firstName,
         last_name: updatedUserData.lastName,
@@ -112,24 +136,26 @@ function App() {
       };
 
       // Make an API request to update the user data
-      const response = await axios.put(
-        `https://reqres.in/api/users/${selectedUser.id}`,
+      const response = await axios.patch(
+        `https://reqres.in/api/users/${userId}`,
         updatedData
       );
 
-      // Check the response status and handle success or error
       if (response.status === 200) {
         console.log("User data updated successfully:", response.data);
-        setIsUpdateModalVisible(false);
+        setIsUpdateModalVisible(false); // Close the modal on success
         getData(); // Refresh the data by calling getData() here
       } else {
         console.error("Error updating user data:", response.data);
       }
     } catch (error) {
       console.error("Error updating user data:", error);
+    } finally {
+      setIsUpdateModalVisible(false); // Make sure to close the modal even in case of errors
     }
   };
 
+  // interate the column
   const columns = [
     {
       title: "ID",
@@ -154,6 +180,7 @@ function App() {
         <img src={text} alt={`Avatar for ${record.first_name}`} />
       ),
     },
+    // Button action
     {
       title: "Actions",
       key: "actions",
@@ -168,12 +195,6 @@ function App() {
       ),
     },
   ];
-
-  const filteredData = data.filter((d) => {
-    return nameField
-      ? d.first_name.toLowerCase().includes(nameField.toLowerCase())
-      : d.email.toLowerCase().includes(emailField.toLowerCase());
-  });
 
   return (
     <div className="App">
@@ -193,27 +214,30 @@ function App() {
         />
       </div>
       <Table
-        dataSource={filteredData}
+        dataSource={filteredData} // tampilan based on filtered data on search bar
         columns={columns}
         pagination={false}
         rowKey="id"
         className="table"
       />
       <div className="pagination">
+        {/* Disable button if already === 1 */}
         <Button onClick={handlePrevPage} disabled={currentPage === 1}>
           Previous
         </Button>
         <span style={{ margin: "0 10px" }}>
           Page {currentPage} of {totalPages}
         </span>
+        {/* Disable button if already === totalPages */}
         <Button onClick={handleNextPage} disabled={currentPage === totalPages}>
           Next
         </Button>
       </div>
+      {/* COMPONENT MODAL UPDATE */}
       <Modal
         title="Update User"
-        visible={isUpdateModalVisible}
-        onOk={updateUserData}
+        visible={isUpdateModalVisible} // modal is visible when click
+        onOk={updateUserData} // submit to update user
         onCancel={() => setIsUpdateModalVisible(false)}
         className="custom-modal"
       >
@@ -227,7 +251,7 @@ function App() {
                 type="text"
                 id="firstName"
                 placeholder="First Name"
-                value={updatedUserData.firstName}
+                value={updatedUserData.firstName} // set default value
                 onChange={(e) =>
                   setUpdatedUserData({
                     ...updatedUserData,
@@ -244,7 +268,7 @@ function App() {
                 type="text"
                 id="lastName"
                 placeholder="Last Name"
-                value={updatedUserData.lastName}
+                value={updatedUserData.lastName} // set default value
                 onChange={(e) =>
                   setUpdatedUserData({
                     ...updatedUserData,
@@ -261,7 +285,7 @@ function App() {
                 type="text"
                 id="email"
                 placeholder="Email"
-                value={updatedUserData.email}
+                value={updatedUserData.email} // set default value
                 onChange={(e) =>
                   setUpdatedUserData({
                     ...updatedUserData,
@@ -278,7 +302,7 @@ function App() {
                 type="text"
                 id="avatar"
                 placeholder="Avatar URL"
-                value={updatedUserData.avatar}
+                value={updatedUserData.avatar} // set default value
                 onChange={(e) =>
                   setUpdatedUserData({
                     ...updatedUserData,
